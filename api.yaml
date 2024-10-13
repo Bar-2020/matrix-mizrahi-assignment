@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: Calculator API
+  version: 1.0.0
+  description: An API to perform basic arithmetic operations.
+paths:
+  /calculate:
+    post:
+      summary: Perform a calculation
+      operationId: calculate
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number1:
+                  type: number
+                  example: 10
+                number2:
+                  type: number
+                  example: 5
+              required:
+                - number1
+                - number2
+      parameters:
+        - in: header
+          name: X-Operation
+          required: true
+          schema:
+            type: string
+            enum: [add, subtract, multiply, divide]
+          description: The operation to perform (add, subtract, multiply, divide).
+      responses:
+        '200':
+          description: Calculation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: number
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
