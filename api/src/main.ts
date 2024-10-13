@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Calculator API')
     .setDescription('An API to perform basic arithmetic operations.')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('calculator')
     .build();
   const document = SwaggerModule.createDocument(app, config);
