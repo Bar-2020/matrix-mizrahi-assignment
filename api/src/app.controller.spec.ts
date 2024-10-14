@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { CalculatorService } from './calculator/calculator.service';
 import { JwtService } from '@nestjs/jwt';
@@ -30,7 +29,6 @@ describe('AppController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
-        AppService,
         AuthService,
         CalculatorService,
         JwtService,
@@ -73,7 +71,7 @@ describe('AppController', () => {
   });
 
   it('should calculate the result', () => {
-    const calculateDto = { value1: 5, value2: 3 };
+    const calculateDto = { num1: 5, num2: 3 };
     const operation: Operation = 'add';
     const result = { result: 8 };
     jest.spyOn(calculatorService, 'calculate').mockReturnValue(result.result);
