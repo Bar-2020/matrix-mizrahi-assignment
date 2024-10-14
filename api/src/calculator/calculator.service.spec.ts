@@ -21,6 +21,11 @@ describe('CalculatorService', () => {
     expect(service.calculate(1, 2, 'add')).toBe(3);
   });
 
+  it('should add two floating point numbers', () => {
+    const result = service.calculate(1.2, 2.7, 'add');
+    expect(result).toBeCloseTo(3.9, 1);
+  });
+
   it('should subtract two numbers', () => {
     expect(service.calculate(5, 3, 'subtract')).toBe(2);
   });
@@ -42,6 +47,19 @@ describe('CalculatorService', () => {
   it('should throw an error for invalid operation', () => {
     // @ts-expect-error testing wrong argument type
     expect(() => service.calculate(6, 3, 'invalid')).toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('should throw an error for missing operation', () => {
+    // @ts-expect-error testing missing parameter
+    expect(() => service.calculate(6, 3)).toThrow(BadRequestException);
+  });
+
+  it('should throw an error for missing number', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Intentionally passing undefined to test error handling
+    expect(() => service.calculate(undefined, 3, 'add')).toThrow(
       BadRequestException,
     );
   });
