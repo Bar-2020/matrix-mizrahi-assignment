@@ -11,12 +11,17 @@ const OperationEnum = {
 
 @Injectable()
 export class CalculatorService {
-  calculate(value1: number, value2: number, operation: Operation): number {
-    const num1 = Number(value1);
-    const num2 = Number(value2);
+  calculate(num1: number, num2: number, operation: Operation): number {
+    if (!num1 || !num2) throw new BadRequestException('Missing number input');
+
+    const parsedNum1 = Number(num1);
+    const parsedNum2 = Number(num2);
+
+    if (!operation) throw new BadRequestException('Math Operation is required');
+
     const symbol = OperationEnum[operation.toUpperCase()];
 
-    if (isNaN(num1) || isNaN(num2)) {
+    if (isNaN(parsedNum1) || isNaN(parsedNum2)) {
       throw new BadRequestException('Invalid number input');
     }
 
@@ -24,11 +29,11 @@ export class CalculatorService {
       throw new BadRequestException('Invalid operation');
     }
 
-    if (symbol === '/' && num2 === 0) {
+    if (symbol === '/' && parsedNum2 === 0) {
       throw new BadRequestException('Division by zero is not allowed');
     }
 
     // Perform the calculation using eval
-    return eval(`${num1} ${symbol} ${num2}`);
+    return eval(`${parsedNum1} ${symbol} ${parsedNum2}`);
   }
 }
