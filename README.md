@@ -41,9 +41,9 @@ This project is a REST API written in NodeJS using the NestJS framework. The API
 
 **Unit Tests**:
 
-    ```sh
+```sh
     npm test
-    ```
+```
 
 ## Docker Configuration
 
