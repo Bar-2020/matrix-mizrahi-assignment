@@ -32,7 +32,10 @@ export class AppController {
   ) {}
 
   @UseGuards(LocalAuthGuard)
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized, invalid login credentials.',
+  })
   @ApiResponse({
     status: 201,
     description: 'Logged in successfully, returns token',
@@ -55,12 +58,15 @@ export class AppController {
     schema: {
       type: 'object',
       properties: {
-        userId: { type: 'number', example: 1 },
+        userId: { type: 'string', example: '1' },
         username: { type: 'string', example: 'john' },
       },
     },
   })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized, bearer token missing or invalid.',
+  })
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
@@ -74,15 +80,15 @@ export class AppController {
     type: CalculateDto,
   })
   @ApiHeader({
-    name: 'X-Operation',
+    name: 'Calculator-Operation',
     required: true,
     description: 'The operation to perform (add, subtract, multiply, divide)',
     enum: ['add', 'subtract', 'multiply', 'divide'],
     example: 'add',
   })
   @ApiResponse({
-    status: 200,
-    description: 'Calculation result',
+    status: 201,
+    description: 'Calculation successful, returns result',
     schema: {
       type: 'object',
       properties: {
@@ -90,11 +96,18 @@ export class AppController {
       },
     },
   })
-  @ApiResponse({ status: 400, description: 'Bad Request' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({
+    status: 400,
+    description:
+      'Bad Request, one of the two number or math operation may be missing or invalid.',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized, bearer token missing or invalid.',
+  })
   calculate(
     @Body() calculateDto: CalculateDto,
-    @Headers('X-Operation') operation: Operation,
+    @Headers('Calculator-Operation') operation: Operation,
   ) {
     const { value1, value2 } = calculateDto;
 

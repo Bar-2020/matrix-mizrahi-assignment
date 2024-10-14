@@ -28,14 +28,14 @@ paths:
                 - number2
       parameters:
         - in: header
-          name: X-Operation
+          name: Calculator-Operation
           required: true
           schema:
             type: string
             enum: [add, subtract, multiply, divide]
           description: The operation to perform (add, subtract, multiply, divide).
       responses:
-        '200':
+        "200":
           description: Calculation result
           content:
             application/json:
@@ -44,9 +44,9 @@ paths:
                 properties:
                   result:
                     type: number
-        '400':
+        "400":
           description: Bad Request
-        '401':
+        "401":
           description: Unauthorized
 
 components:
