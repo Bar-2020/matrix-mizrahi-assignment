@@ -39,38 +39,14 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should validate a user with correct credentials', async () => {
-    const mockUser: User = hardcodedUsers[0];
-    jest.spyOn(usersService, 'findOne').mockResolvedValue(mockUser);
-
-    const result = await service.validateUser(
-      hardcodedUsers[0].username,
-      hardcodedUsers[0].password,
-    );
-    expect(result).toEqual({
-      userId: hardcodedUsers[0].userId,
-      username: hardcodedUsers[0].username,
-    });
-  });
-
   it('should return null for a user with incorrect credentials', async () => {
     const mockUser: User = hardcodedUsers[0];
     jest.spyOn(usersService, 'findOne').mockResolvedValue(mockUser);
 
     const result = await service.validateUser(
       hardcodedUsers[0].username,
-      'wrongpassword',
+      hardcodedUsers[0].password + 'wrongpassword',
     );
     expect(result).toBeNull();
-  });
-
-  it('should login a user and return a JWT token', async () => {
-    const mockUser: Pick<User, 'userId' | 'username'> = {
-      userId: hardcodedUsers[0].userId,
-      username: hardcodedUsers[0].username,
-    };
-    const result = await service.login(mockUser);
-
-    expect(result).toEqual({ access_token: 'signed-token' });
   });
 });

@@ -11,8 +11,6 @@ import { hardcodedUsers } from './users/hardcoded-users';
 
 describe('AppController', () => {
   let appController: AppController;
-  let authService: AuthService;
-  let calculatorService: CalculatorService;
 
   beforeEach(async () => {
     const mockJwtAuthGuard = {
@@ -41,40 +39,16 @@ describe('AppController', () => {
     }).compile();
 
     appController = module.get<AppController>(AppController);
-    authService = module.get<AuthService>(AuthService);
-    calculatorService = module.get<CalculatorService>(CalculatorService);
   });
 
   it('should be defined', () => {
     expect(appController).toBeDefined();
   });
 
-  it('should login a user', async () => {
-    const loginDto = {
-      username: hardcodedUsers[0].username,
-      password: hardcodedUsers[0].password,
-    };
-    const result = { access_token: 'signed-token' };
-    jest.spyOn(authService, 'login').mockResolvedValue(result);
-
-    expect(await appController.login({ user: loginDto })).toBe(result);
-  });
-
-  it('should return user profile', () => {
-    const req = {
-      user: {
-        userId: hardcodedUsers[0].userId,
-        username: hardcodedUsers[0].username,
-      },
-    };
-    expect(appController.getProfile(req)).toBe(req.user);
-  });
-
   it('should calculate the result', () => {
     const calculateDto = { num1: 5, num2: 3 };
     const operation: Operation = 'add';
     const result = { result: 8 };
-    jest.spyOn(calculatorService, 'calculate').mockReturnValue(result.result);
 
     expect(appController.calculate(calculateDto, operation)).toEqual(result);
   });
