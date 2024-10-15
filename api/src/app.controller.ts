@@ -6,6 +6,7 @@ import {
   UseGuards,
   Body,
   Headers,
+  HttpCode,
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
@@ -42,6 +43,7 @@ export class AppController {
 
   @CalculateEndpoint()
   @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
   @Post('calculate')
   calculate(
     @Body() { num1, num2 }: CalculateDto,

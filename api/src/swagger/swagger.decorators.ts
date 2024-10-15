@@ -47,7 +47,7 @@ export function CalculateEndpoint() {
       example: 'add',
     }),
     ApiResponse({
-      status: 201,
+      status: 200,
       description: 'Calculation successful, returns result',
       schema: {
         type: 'object',
