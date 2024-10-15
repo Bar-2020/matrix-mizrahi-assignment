@@ -19,10 +19,9 @@ This project is a REST API written in NodeJS using the NestJS framework. I used 
 
 ### Running the Application
 
-1. **Clone the repository**:
+1. **CD into the repository**:
 
    ```sh
-   git clone <repository-url>
    cd <repository-directory>
    ```
 
