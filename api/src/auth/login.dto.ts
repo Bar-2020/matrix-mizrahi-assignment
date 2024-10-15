@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { User } from 'src/users/users.service';
+
+import { User } from '../users/users.service';
 
 // I provided actual user credentials here for testing purposes.
 export class LoginDto {
