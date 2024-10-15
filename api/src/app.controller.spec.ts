@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { JwtService } from '@nestjs/jwt';
+import { ExecutionContext } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+
 import { AppController } from './app.controller';
 import { AuthService } from './auth/auth.service';
 import { CalculatorService } from './calculator/calculator.service';
-import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users/users.service';
-import { ExecutionContext } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 import { Operation } from './calculator/calculator.dto';
 import { hardcodedUsers } from './users/hardcoded-users';
 
