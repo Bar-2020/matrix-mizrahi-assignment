@@ -1,4 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+
 import { Operation } from './calculator.dto';
 
 // Define the enum for operations
@@ -12,7 +13,14 @@ const OperationEnum = {
 @Injectable()
 export class CalculatorService {
   calculate(num1: number, num2: number, operation: Operation): number {
-    if (!num1 || !num2) throw new BadRequestException('Missing number input');
+    if (
+      num1 === null ||
+      num1 === undefined ||
+      num2 === null ||
+      num2 === undefined
+    ) {
+      throw new BadRequestException('Missing number input');
+    }
 
     const parsedNum1 = Number(num1);
     const parsedNum2 = Number(num2);
