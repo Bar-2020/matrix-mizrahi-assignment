@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { JwtService } from '@nestjs/jwt';
+
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { User, UsersService } from '../users/users.service';
-import { JwtService } from '@nestjs/jwt';
 import { hardcodedUsers } from '../users/hardcoded-users';
 
 describe('AuthService', () => {
