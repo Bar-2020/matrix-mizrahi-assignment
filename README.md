@@ -1,6 +1,6 @@
 # Calculator API
 
-This project is a REST API written in NodeJS using the NestJS framework. The API performs basic arithmetic operations (addition, subtraction, multiplication, division) on two numerical values provided in the body of a POST request. The math operation is required as an http header. The API also requires an HTTP header for authorization using JWT (Bearer).
+This project is a REST API written in NodeJS using the NestJS framework. I used the @nestjs/passport module with the passport-jwt strategy to secure endpoints with JWT. The API performs basic arithmetic operations (addition, subtraction, multiplication, division) on two numerical values provided in the body of a POST request. The math operation is required as an http header. The API also requires an HTTP header for authorization using JWT (Bearer).
 
 ## Features
 
