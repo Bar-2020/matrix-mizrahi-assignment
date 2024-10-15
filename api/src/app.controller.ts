@@ -47,8 +47,6 @@ export class AppController {
     @Body() { num1, num2 }: CalculateDto,
     @Headers('Calculator-Operation') operation: Operation,
   ) {
-    // const { num1, num2 } = calculateDto;
-
     return {
       result: this.calculatorService.calculate(num1, num2, operation),
     };
