@@ -86,5 +86,10 @@ export function LoginEndpoint() {
       status: 401,
       description: 'Unauthorized, invalid login credentials.',
     }),
+    ApiResponse({
+      status: 400,
+      description:
+        'Bad request, invalid login credentials. "username" or "password" is missing.',
+    }),
   );
 }
